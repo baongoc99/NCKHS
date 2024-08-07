@@ -1,0 +1,101 @@
+﻿@model List<NCKH.Models.Role>
+
+@{
+    ViewData["Title"] = "Create User";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="page-wrapper">
+    <div class="content container-fluid">
+        <div class="page-header">
+
+            <div class="row align-items-center">
+                <div class="col">
+                    <h3 class="page-title">Add User</h3>
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="time-table.html">Users</a></li>
+                        <li class="breadcrumb-item active">Add User</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="card">
+                <div class="card-body">
+                    <form action="/Admin/employee/create" method="POST" enctype="multipart/form-data">
+
+                        <div class="row">
+                            <div class="col-12 col-sm-4">
+                                <div class="form-group local-forms">
+                                    <label for="CodeEmployee" class="form-label">CodeEmployee<span class="login-danger">*</span></label>
+                                    <input type="text" class="form-control" id="CodeEmployee" name="CodeEmployee" required>
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-4">
+                                <div class="form-group local-forms">
+                                    <label for="EmployeeName" class="form-label">EmployeeName <span class="login-danger">*</span></label>
+                                    <input type="text" class="form-control" id="EmployeeName" name="EmployeeName" required>
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-4">
+                                <div class="form-group local-forms">
+                                    <label for="email" class="form-label">Email <span class="login-danger">*</span></label>
+                                    <input type="email" class="form-control" id="email" name="Email"  required>
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-4">
+                                <div class="form-group local-forms">
+                                    <label for="phoneNumber" class="form-label">Phone Number <span class="login-danger">*</span></label>
+                                    <input type="tel" class="form-control" id="phoneNumber" name="PhoneNumber" >
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-4">
+                                <div class="form-group local-forms">
+                                    <label for="StartDatetime" class="form-label">StartDatetime <span class="login-danger">*</span></label>
+                                    <input type="date" class="form-control datetimepicker" id="StartDatetime" name="StartDatetime">
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-4">
+                                <div class="form-group local-forms">
+                                    <label>Status <span class="login-danger">*</span></label>
+                                    <select class="form-control select" name="RoleId">
+                                        @if (Model != null)
+                                        {
+                                            @foreach (var category in Model)
+                                            {
+                                                <option value="@category.Id">@category.RoleName</option>
+                                            }
+                                        
+                                        }else
+                                        {
+                                            <option>0</option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                           
+                        
+                            <div class="col-12 col-sm-4">
+                                <div class="form-group local-forms">
+                                    <label for="password" class="form-label">Password <span class="login-danger">*</span></label>
+                                    <input type="password" class="form-control" id="password" name="Password" required>
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-4">
+                                <div class="form-group local-forms">
+                                    <label for="Address" class="form-label">Address <span class="login-danger">*</span></label>
+                                    <input type="Address" class="form-control" id="Address" name="Address" required>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="student-submit">
+                                    <button type="submit" class="btn btn-primary">Create</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

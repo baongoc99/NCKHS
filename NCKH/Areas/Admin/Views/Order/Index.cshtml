@@ -1,0 +1,150 @@
+﻿@model NCKH.Models.ModelDataset
+
+@{
+    ViewData["Title"] = "Edit Category";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="page-wrapper">
+    <div class="content container-fluid">
+        <div class="page-header">
+            <div class="row align-items-center">
+                @*  <div class="col">
+                <h3 class="page-title">Edit Category</h3>
+                <ul class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/Admin/Category/IndexCategory">Category</a></li>
+                <li class="breadcrumb-item active">Edit Category</li>
+                </ul>
+                </div> *@
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card-body">
+
+                    <form action="/Admin/order/thanhtoan" method="POST">
+                        <div class="row">
+
+                            <div class="col-3">
+                                <div class="form-group local-forms">
+                                    <label>CustomerType <span class="login-danger">*</span></label>
+                                    <input type="text" id="CustomerType" class="form-control" name="CustomerType" required>
+                                    <span asp-validation-for="CustomerType" class="invalid-feedback"></span>
+                                </div>
+                                <div class="form-group local-forms">
+                                    <label>CompanyName <span class="login-danger">*</span></label>
+                                    <input type="text" id="CompanyName" class="form-control" name="CompanyName" required>
+                                    <span asp-validation-for="CompanyName" class="invalid-feedback"></span>
+                                </div>
+                                <div class="form-group local-forms">
+                                    <label>ContactPerson <span class="login-danger">*</span></label>
+                                    <input type="text" id="ContactPerson" class="form-control" name="ContactPerson" required>
+                                    <span asp-validation-for="ContactPerson" class="invalid-feedback"></span>
+                                </div>
+                                <div class="form-group local-forms">
+                                    <label>Email <span class="login-danger">*</span></label>
+                                    <input type="email" id="Email" class="form-control" name="Email" required>
+                                    <span asp-validation-for="Email" class="invalid-feedback"></span>
+                                </div>
+                                <div class="form-group local-forms">
+                                    <label>PhoneNumber <span class="login-danger">*</span></label>
+                                    <input type="number" id="PhoneNumber" class="form-control" name="PhoneNumber" required>
+                                    <span asp-validation-for="PhoneNumber" class="invalid-feedback"></span>
+                                </div>
+                            </div>
+                            <div class="col-9">
+                                <div class="card card-table comman-shadow">
+                                    <div class="card-body">
+                                        <div class="table-responsive">
+                                            <table class="table table-stripped table-hover table-center mb-0" id="dataList">
+                                                <thead class="student-thread">
+                                                    <tr>
+                                                        <th class="text-center">ID</th>
+                                                        <th class="text-center">Name</th>
+                                                        <th class="text-center">Price</th>
+                                                        <th class="text-center">Quantity</th>
+                                                        <th class="text-center">Image</th>
+                                                        <th class="text-center">Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach (var product in Model.listproduct)
+                                                    {
+                                                        <tr>
+                                                            <td class="text-center">@product.Id</td>
+                                                            <td class="text-center">@product.Name</td>
+                                                            <td class="text-center">@product.Price</td>
+                                                            <td class="text-center">@product.Quantity</td>
+                                                            <td class="text-center">
+                                                                <img src="~/@product.Image" alt="Product Image" style="max-width: 100px; max-height: 100px;" />
+                                                            </td>
+                                                            <td class="text-center">
+                                                                <a href="/Admin/order/Addorderdetals?idproduct=@product.Id" class="btn btn-sm btn-warning">
+                                                                    <i class="fa fa-edit"></i>
+                                                                </a>
+                                                            </td>
+                                                        </tr>
+                                                    }
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card card-table comman-shadow">
+                                    <div class="card-body">
+                                        <div class="table-responsive">
+                                            <table class="table table-stripped table-hover table-center mb-0" id="dataList">
+                                                <thead class="student-thread">
+                                                    <tr>
+                                                        <th class="text-center">ID</th>
+                                                        <th class="text-center">Quantity</th>
+                                                        <th class="text-center">TotalPrice</th>
+                                                        <th class="text-center">Product</th>
+                                                        <th class="text-center">Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @if (Model.orderDetailCustomers != null)
+                                                    {
+                                                        @foreach (var orderDetailCustomer in Model.orderDetailCustomers)
+                                                        {
+                                                            <tr>
+                                                                <td class="text-center">@orderDetailCustomer.Id</td>
+                                                                <td class="text-center">@orderDetailCustomer.Quantity</td>
+                                                                <td class="text-center">@orderDetailCustomer.TotalPrice</td>
+                                                                <td class="text-center">@orderDetailCustomer.Product.Name</td>
+
+                                                                <td class="text-center">
+                                                                    <a href="/Admin/order/deleteorderDetailCustomer?id=@orderDetailCustomer.Id&amp;idproduct=@orderDetailCustomer.ProductId" class="btn btn-sm btn-danger">
+                                                                        <i class="fa fa-trash"></i>
+                                                                    </a>
+                                                                </td>
+                                                            </tr>
+                                                        }
+
+                                                    }else
+                                                    {
+                                                        <p>[]null</p>    
+                                                    }
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-12">
+                                <div class="customer-submit">
+                                    <button type="submit" class="btn btn-primary">Update</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
